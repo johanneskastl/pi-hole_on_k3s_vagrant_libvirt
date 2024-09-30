@@ -1,0 +1,33 @@
+---
+
+- name: 'Install, configure and start k3s on the additional server nodes'
+  hosts: 'k3sservers:!k3sservers[0]'
+  gather_facts: true
+  become: true
+  # only run one node at a time, otherwise the first start of the service might fail
+  serial: 1
+
+  pre_tasks:
+
+    - name: 'Create /etc/rancher/k3s directory'
+      ansible.builtin.file:
+        path: '/etc/rancher/k3s'
+        state: 'directory'
+        owner: 'root'
+        group: 'root'
+        mode: '0755'
+
+    - name: 'Copy token file to /etc/rancher/k3s/token_to_register'
+      ansible.builtin.copy:
+        src: 'k3s-token'
+        dest: '/etc/rancher/k3s/token_to_register'
+        owner: 'root'
+        group: 'root'
+        mode: '0600'
+
+  roles:
+    - role: 'install_k3s'
+      vars:
+        k3s_node_type: 'server'
+        server_url: "https://{{ hostvars[groups['k3sservers'][0]]['ansible_default_ipv4']['address'] }}:6443"
+        token_file: '/etc/rancher/k3s/token_to_register'
