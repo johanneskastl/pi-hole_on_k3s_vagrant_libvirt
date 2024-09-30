@@ -6,3 +6,10 @@
 
 - name: 'Run playbook-bootstrap_python.yml'
   ansible.builtin.import_playbook: playbook-bootstrap_python.yml
+
+#
+# k3s
+#
+
+- name: 'Run playbook-01_first_server.yml'
+  ansible.builtin.import_playbook: playbook-01_first_server.yml
