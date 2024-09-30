@@ -1,0 +1,12 @@
+---
+
+- name: 'Install, configure and start k3s on the first k3s server'
+  hosts: 'k3sservers[0]'
+  gather_facts: true
+  become: true
+
+  roles:
+    - role: 'install_k3s'
+      vars:
+        fetch_token: 'true'
+        cluster_init: 'true'
