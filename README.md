@@ -21,6 +21,12 @@ Same holds true for the sizing of the machines.
 1. Open the URL that Ansible prints out at the end of the provisioning, and log
    in using the username `admin` with the password `totallynotsecure`.
    (The URL should look something like `http://pihole.192.0.2.13.sslip.io`).
+1. You can also test a DNS query using e.g. `dig` or `drill` or `doggo` etc.
+
+   ```
+   dig @192.0.2.13 opensuse.org
+   ```
+
 1. Party!
 
 ## Cleaning up
