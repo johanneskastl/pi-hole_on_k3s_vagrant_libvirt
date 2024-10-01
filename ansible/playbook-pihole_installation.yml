@@ -70,6 +70,44 @@
           # dismail.de
           DNS2: '116.203.32.217'
 
+    - name: 'Create an ingressrouteTCP for DNS'
+      delegate_to: 'localhost'
+      kubernetes.core.k8s:
+        state: 'present'
+        resource_definition: |
+          apiVersion: traefik.io/v1alpha1
+          kind: IngressRouteTCP
+          metadata:
+            name: pihole-dns-tcp
+            namespace: pihole
+          spec:
+            entryPoints:
+              - dns-tcp
+            routes:
+            - match: HostSNI(`*`)
+              services:
+              - name: pihole-dns-tcp
+                port: 53
+
+    - name: 'Create an ingressrouteUDP for DNS'
+      delegate_to: 'localhost'
+      kubernetes.core.k8s:
+        state: 'present'
+        resource_definition: |
+          apiVersion: traefik.io/v1alpha1
+          kind: IngressRouteUDP
+          metadata:
+            name: pihole-dns-udp
+            namespace: pihole
+          spec:
+            entryPoints:
+              - dns-udp
+            routes:
+            - match: HostSNI(`*`)
+              services:
+              - name: pihole-dns-udp
+                port: 53
+
     - name: 'Wait until all pods are running'
       delegate_to: 'localhost'
       kubernetes.core.k8s_info:
