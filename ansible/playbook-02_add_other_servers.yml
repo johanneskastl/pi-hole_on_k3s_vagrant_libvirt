@@ -31,3 +31,4 @@
         k3s_node_type: 'server'
         server_url: "https://{{ hostvars[groups['k3sservers'][0]]['ansible_default_ipv4']['address'] }}:6443"
         token_file: '/etc/rancher/k3s/token_to_register'
+        disable_something: 'traefik'
