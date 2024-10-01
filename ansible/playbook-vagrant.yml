@@ -18,6 +18,13 @@
   ansible.builtin.import_playbook: playbook-02_add_other_servers.yml
 
 #
+# Install Traefik with dns endpoints
+#
+
+- name: 'Run playbook-traefik_installation.yml'
+  ansible.builtin.import_playbook: playbook-traefik_installation.yml
+
+#
 # Pi-Hole
 #
 
