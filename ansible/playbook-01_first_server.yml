@@ -10,3 +10,4 @@
       vars:
         fetch_token: 'true'
         cluster_init: 'true'
+        disable_something: 'traefik'
