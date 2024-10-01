@@ -153,3 +153,8 @@
       delegate_to: 'localhost'
       ansible.builtin.debug:
         msg: "Log in using the admin user and the password 'totallynotsecure'"
+
+    - name: 'DNS Test command'
+      delegate_to: 'localhost'
+      ansible.builtin.debug:
+        msg: "You can also try a dns query using e.g. 'dig @{{ hostvars['k3sserver1']['ansible_default_ipv4']['address'] }} opensuse.org'"
