@@ -18,8 +18,9 @@ Same holds true for the sizing of the machines.
 1. Make sure the git submodules are fully working by issuing `git submodule init
    && git submodule update`
 1. Run `vagrant up`
-1. Run `kubectl --kubeconfig ansible/k3s-kubeconfig get nodes` and you should
-   see your server and agent nodes.
+1. Open the URL that Ansible prints out at the end of the provisioning, and log
+   in using the username `admin` with the password `totallynotsecure`.
+   (The URL should look something like `http://pihole.192.0.2.13.sslip.io`).
 1. Party!
 
 ## Cleaning up
